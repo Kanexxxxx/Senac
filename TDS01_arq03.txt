@@ -1,0 +1,101 @@
+OPERADORES ARITMÉTICOS E FUNÇÕES MATEMÁTICAS
+
+**  exponenciação
+/   divisão
+*   multiplicação
+-   subtração
++   adição
+
+Além destes temos o módulo (%). O módulo é utilizado para obter o resto da divisão entre dois números.
+
+const a = 5 % 2		// a = 1
+const b = 7 % 4		// b = 3
+
+Cálculos como raiz quadrada, seno e cosseno podem ser obtidos com o uso das funções da classe Math.
+Principais funções:
+
+Math.abs(num) -> Retorna o valor absoluto de um número, ou seja, se o valor for negativo, ele será
+		 convertido para positivo. Se positivo, o valor permanece o mesmo.
+		 Ex: Math.abs(-3)	// 3
+
+Math.ceil(num) -> Arredonda o valor para cima. Dessa forma, se o valor possuir casas decimais, retorna
+		  o próximo número inteiro do valor analisado.
+		  Ex: Math.ceil(4.2)	// 5
+
+Math.floor(num) -> Arredonda o valor para baixo, retornando a parte inteira do número.
+		   Ex: Math.floor(7.9)	// 7
+
+Math.pow(base, exp) ->Retorna a base elevada ao expoente.
+		      Ex: Math.pow(3, 2)	// 9
+
+Math.random() -> Retorna um número aleatório entre 0 e 1, com várias casas decimais. O número
+		 aleatório possível inicia em 0 e vai até um valor inferior a 1.
+		 Ex: Math.random()	// 0.6501314074022906
+
+Math.round(num) -> Arredonda o valor para o inteiro mais próximo. A partir de .5 na parte fracionária
+	 	   o valor é arredondado para cima. Anterior a .5 é arredondado para baixo.
+		   Ex: Math.round(2.7)	// 3
+
+Math.sqrt(num) -> Retorna a raiz quadrada do número (square root).
+		  Ex: Math.sqrt(16)	// 4
+
+Ao criar expressões matemáticas, devemos ter cuidado com a ordem de precedência dos operadores:
+
+const media1 = (nota1 + nota2) / 2
+const media2 = nota1 + nota2 / 2
+
+Hierarquia de operadores:
+
+Os parênteses redefinem a ordem das prioridades. 
+Exemplo...: 10 * (6 - (2 * 2))
+Calculo(1): 10 * (6 - 4)
+Calculo(2): 10 * 2
+Resultado.: 20
+
+As funções matemáticas ou funções criadas pelo usuário tem prioridade sobre os operadores
+Exemplo...: Math.sqrt(9) * 8 / 2
+Calculo(1): 3 * 8 / 2
+Calculo(2): 24 / 2
+Resultado.: 12
+
+Operadores de multiplicação, divisão e módulo tem prioridade sobre adição e subtração
+Exemplo...: 2 + 5 * 2
+Calculo(1): 2 + 10
+Resultado.: 12
+
+Caso a expressão tenha o mesmo nível de hierarquia, o resultado é calculado da esquerda para a direita.
+Exemplo...: 5 / 2 * 3
+Calculo(1): 2.5 * 3
+Resultado.: 7.5
+
+EXEMPLOS:
+a) Elaborar um programa para um cinema, que leia o título e a duração de um filme em minutos.
+   Exiba o título do filme e converta a duração para horas e minutos.
+   Crie o arquivo cinema.html e cinema.js
+
+b) Elaborar um programa para uma revenda de veículos. O programa deve ler modelo e preço do veículo. 
+   Apresentar como resposta o valor da entrada (50%) e o saldo em 12x.
+   Crie o arquivo revenda.html e revenda.js
+
+c) Elaborar um programa para um restaurante que leia o preço por kg e o consumo (em gramas) de um 
+   cliente. Exiba o valor a ser pago.
+   Crie o arquivo restaurante.html e restaurante.js
+
+EXERCICIOS:
+a) Uma farmácia está com uma promoção, na compra de duas unidades de um mesmo medicamento, o cliente 
+   recebe como desconto os centavos do valor total.
+   Elabore um programa que leia a descrição e preço de um medicamento. 
+   Informe o valor do produto na promoção.
+   Crie o arquivo farmacia.html e farmacia.js
+
+b) Elaborar um programa para uma lan house de um aeroporto, o programa deve ler o valor de cada 
+   15 minutos de uso de um computador e o tempo de uso por um cliente em minutos.
+   Informe o valor a ser pago pelo cliente, sabendo que as frações extras de 15 minutos devem ser 
+   cobradas de forma integral.
+   Crie o arquivo lanhouse.html e lanhouse.js
+
+c) Um supermercado está com umapromoção para aumentar suas vendas no setor de higiene, cada etiqueta
+   de produto deve exibir uma mensagem anunciando 50% de desconto (para um item) na compra de três
+   unidades do produto. Elaborar um programa que leia descrição e preço de um produto. 
+   Após, apresente as mensagens indicando a promoção.
+   Crie o aruiqvo supermercado.html e supermercado.js

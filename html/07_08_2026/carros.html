@@ -1,0 +1,39 @@
+<script>
+const carros =[];
+carros.push({modelo: "Corrola Cross", preco:46500})
+carros.push({modelo: "Honda Civic", preco:56800})
+
+const modelo = "BYD Atto 3";
+const preco = 150000;
+carros.push({modelo, preco});
+
+for(const carro of carros){
+    const {modelo, preco} = carros;
+    console.table(`${modelo}- R$: ${preco}`)
+
+    
+}
+
+//const pacientes= ["Felipe", "Miguel", "João"]
+// const [a, b, c] = pacientes;
+// console.log(a);
+// console.log(b);
+// console.log(c);
+
+
+// const pacientes= ["Felipe", "Miguel", "João"]
+// const [atender, proximo, ...outros] = pacientes;
+// console.log(atender);
+// console.log(proximo);
+// console.log(outros);
+
+// const carro = {modelo: "Corola Cross", preco:46500}
+// const carro2 = {...carro, ano:2025}
+// console.log(carro2);
+
+
+let pacientes = ["Felipe",  "João"]
+pacientes = ["Miguel", ...pacientes]
+pacientes = [...pacientes, "Mario"]
+console.log(pacientes);
+</script>

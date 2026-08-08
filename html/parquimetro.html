@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../IMG/js.png">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <title>Parquimetro</title>
+</head>
+
+<body>
+    <img src="../IMG/exerc.jpg" alt="Exercicios">
+    <h1>Programa Parquimetro</h1>
+
+    <form>
+        <p>Valor depositado R$:
+            <input type="number" id="inValor" min="0" step="0.01" required>
+        </p>
+        <p>
+            <input type="submit" value="Confirmar Deposito">
+            <input type="reset" value="Limpar">
+        </p>
+    </form>
+
+    <h3 id="outTempo"></h3>
+    <h3 id="outTroco"></h3>
+
+    <script src="../JS/parquimetro.js"></script>
+</body>
+
+</html>

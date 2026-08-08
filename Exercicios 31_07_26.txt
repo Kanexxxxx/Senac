@@ -1,0 +1,86 @@
+Exercício 1 - Lista de Compras Inteligente
+
+Arquivo: exercicio1.html
+
+Enunciado
+
+Uma pessoa deseja organizar sua lista de compras.
+
+Crie um programa que permita:
+
+Digitar o nome de um produto.
+Adicionar o produto ao final da lista.
+Adicionar o produto no início da lista.
+Remover o primeiro produto.
+Remover o último produto.
+Mostrar:
+quantidade de produtos (length);
+lista utilizando join(" | ");
+lista utilizando toString().
+Mostrar todos os produtos utilizando um for tradicional.
+
+Desafio: não permitir inserir nomes vazios.
+
+----------------------------------------------------------
+Exercício 2 - Cadastro de Alunos
+
+Arquivo: exercicio2.html
+
+Enunciado
+
+Uma escola deseja controlar uma turma.
+
+O programa deve:
+
+Cadastrar alunos.
+Mostrar todos usando for...of.
+Localizar um aluno usando includes().
+Informar a posição usando indexOf().
+Remover um aluno utilizando splice().
+Mostrar apenas os três primeiros alunos utilizando slice().
+
+------------------------------------------------------------
+Exercício 3 - Controle de Filmes
+
+Arquivo: exercicio3.html
+
+Enunciado
+
+Uma locadora deseja organizar sua lista de filmes.
+
+Seu programa deve permitir:
+
+adicionar filmes;
+listar usando forEach();
+descobrir a primeira ocorrência de um filme (indexOf());
+descobrir a última ocorrência (lastIndexOf());
+inserir um novo filme antes de outro usando splice();
+remover qualquer filme usando splice();
+mostrar apenas os últimos três filmes usando slice(-3).
+
+-----------------------------------------------------------
+Exercício 4 - Controle de Senhas de Atendimento
+
+Arquivo: exercicio4.html
+
+Enunciado
+
+Uma clínica deseja controlar as senhas de atendimento.
+
+O programa deverá possuir:
+
+botão Senha Normal
+botão Senha Prioritária
+botão Atender Próximo
+botão Localizar Senha
+botão Mostrar Fila
+
+Regras:
+
+senha normal entra no final (push);
+prioritária entra no início (unshift);
+atender remove o primeiro (shift);
+mostrar a fila utilizando forEach();
+mostrar quantidade utilizando length;
+localizar uma senha utilizando includes() e indexOf();
+exibir a fila também utilizando join(" → ").

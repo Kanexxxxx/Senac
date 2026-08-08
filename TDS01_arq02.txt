@@ -1,0 +1,95 @@
+INTEGRAÇÃO COM HTML:
+
+Para desenvolver uma página web devemos criar um arquivo HTML (Hiper Text Markup Language)
+contendo as tags (comandos) HTML que definem o conteúdo e a semântica dos elementos que
+constituem a página.
+
+ESTRUTURA BÁSICA DE UM DOCUMENTO HTML:
+
+Abrir VSCODE.
+Criar novo arquivo HTML chamado ex-html01.html
+Há um recurso chamado Emmet Abbreviation que permite inserir um modelo usando !
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+mudar idioma
+
+CABEÇALHOS, PARÁGRAFOS E CAMPOS DE FORMULÁRIO:
+
+Adicionar titulos <h>
+Formulário <form>
+Parágrafo <p>
+Campo de formulário <input>
+Chamar arquivo JavaScript externo.
+
+CRIAÇÃO DO PROGRAMA JAVASCRIPT
+Criar programa para manipular o DOM.
+(Document Object Model)
+
+MÉTODOS querySelector() e getElementById()
+Para referenciar um elemento HTML identificado no documento, podemos utilizar esse métodos.
+Com getElementById() referenciamos pelo atributo id.
+Com querySelector() podemos referenciar por id, classe ou nome da tag.
+
+const resp = document.querySelector("h3");	// elemento h3 da página
+
+const resp = document.querySelector("#inCor");	// elemento com id=inCor
+
+const lista = document.querySelector(".lista");	// elemento da class=lista
+
+A desvantagem do do querySelector() é não ser reconhecido em versões antigas de navegadores.
+
+Além do querySelector() há o querySelectorAll(), que cria uma lista com todos os 
+elementos que correspondam ao seletor. (veremos posteriormente).
+
+Armazenando a referência a um elemento em uma variável, podemos depois obter sua propriedade:
+
+const frm = document.querySelector("form");
+const nome = frm.inNome.value;
+
+Também podemos fazer isso em uma unica linha:
+
+const nome = document.querySelector("form").inNome.value;
+
+INTRODUÇÃO A EVENTOS E FUNÇÕES
+No exemplo anterior o browser apresentou o nome do programa, um campo de texto (Nome) e um botão.
+A página está ESTATICA, esperando um nome e o clique no botão.
+Ao clicar no botão uma função deve ser executada. (evento)
+Para criar um evento e definir o que acontece, devemos colocar uma palavra reservada da
+linguagem que ficará "na escuta".
+A palavra reservada pode ser: submit, change, click, blur ou load, por exemplo.
+Para adicionar um ouvinte de evento a um elemento da página, utlizamos o método addEventListener(),
+com o evento e o nome de uma função ou uma arrow function (função de seta) com os comandos.
+
+frm.addEventListener("submit", (e) => { comandos });
+
+Exercicio:
+Refaça agora o programa de calcular o dobro de um número utilizando o evento submit.
+Refaça o programa de calcular a média das notas de um aluno.
+
+PROPRIEDADES innerText, innerHTML e value
+innerText -> Consulta ou altera o texto exibido por elementos HTML, como parágrafos (p),
+	     cabeçalhos (h1, h2,...) ou containers (span, div).
+
+innerHTML -> Consulta ou altera o conteúdo de elementos HTML como parágrafos (p), cabeçalhos (h)
+             ou containers (span, div). Códigos HTML presentes no conteúdo são renderizados pelo
+	     navegador.
+
+value -> Consulta o ualtera o conteúdo de campos de formulário.
+
+As propriedades textContent ou outerText são semelhantes ao innerText.
+
+MÉTODO preventDefault()
+Quando o usuário clica sobre o botão submit do formulário, uma ação de envio dos dados do form
+é executada. Isso faz um reload da página, e tanto o conteúdo dos campos e as respostas exibidas
+são perdidas.

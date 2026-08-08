@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Exercício 3</title>
+
+<style>
+body{
+font-family:Arial;
+max-width:700px;
+margin:auto;
+padding:20px;
+}
+</style>
+</head>
+<body>
+<h2>Filmes</h2>
+
+<input id="filme">
+<button onclick="adicionar()">Adicionar</button>
+<button onclick="listar()">Listar</button>
+<button onclick="remover()">Remover</button>
+<div id="saida"></div>
+
+<script>
+
+const filmes=[];
+
+function adicionar(){
+    const f=document.getElementById("filme").value;
+    if(f=="") return;
+    filmes.push(f);
+}
+
+function remover(){
+    const f=document.getElementById("filme").value;
+    const p=filmes.indexOf(f);
+
+    if(p!=-1){
+        filmes.splice(p,1);
+        listar();
+    }
+}
+
+function listar(){
+    let txt="";
+    filmes.forEach((filme,i)=>{
+    txt+=(i+1)+" - "+filme+"<br>";
+});
+
+txt+="<br>Últimos três:<br>";
+txt+=filmes.slice(-3).join("<br>");
+document.getElementById("saida").innerHTML=txt;
+
+}
+
+</script>
+
+</body>
+</html>

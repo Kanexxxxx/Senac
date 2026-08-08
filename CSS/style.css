@@ -1,0 +1,66 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 20px;
+}
+
+img {
+    float: left;
+    width: 300px;
+    height: 300px;
+    margin: 0 15px 15px 0;
+    object-fit: cover;
+}
+
+img.normal {
+    height: 300px;
+}
+
+img.alta {
+    height: 420px;
+}
+
+h1 {
+    border-bottom-style: inset;
+}
+
+form {
+    margin-top: 10px;
+}
+
+input,
+select {
+    margin: 4px;
+}
+
+h3 {
+    clear: none;
+}
+
+pre {
+    font-size: 1.2em;
+}
+
+.aprovado,
+.fonteAzul {
+    color: blue;
+}
+
+.exame {
+    color: orange;
+}
+
+.reprovado {
+    color: red;
+}
+
+.oculta {
+    display: none;
+}
+
+.exibe {
+    display: inline;
+}
+
+.italico {
+    font-style: italic;
+}

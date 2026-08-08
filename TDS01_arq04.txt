@@ -1,0 +1,46 @@
+CONSTRUÇÃO DE ALGORITMOS COM Node.js
+
+Até agora usamos o JavaScript interagindo através de:
+- caixas de diálogo exibidas no browser
+- a partir de páginas web, com formulários
+
+Não foi necessário instalar nada pois o browser já contém um interpretador para o JS.
+
+Outro modo de construir algoritmos JS é utilizando o Node.js
+
+O Node.js é um ambiente de execução de programas JS gratuito, open code e multiplataforma,
+permitindo escrever programas de linha de comando e scripts do  lado do servidor, fora do navegador.
+
+O que muda é que o programa JS não estará rodando a partir de um navegador web, e sim a partir
+de um prompt de comandos.
+
+No prompt de comandos digite: node -v  (versão)
+
+ADIÇÃO DE PACOTES PARA ENTRADA DE DADOS
+Esse passo é para adicionar um pacote que permitirá que os nossos programas façam a entrada de dados
+via linha de comando.
+
+Utilizaremos o prompt-sync() que contém os recursos básicos necessários para o desenvolvimento
+de algoritmos.
+
+C:\TDS01\npm i prompt-sync
+C:\TDS01>md programasNode
+C:\TDS01>cd programasNode
+
+No VSCODE, com a pasta ja aberta:
+Crie o arquivo somaDoisNumeros.js
+execute no terminal do VSCODE.
+
+Crie o arquivo revenda.js
+
+Exemplos:
+a) Elabore um programa para uma empresa que leia o salário e o tempo que um funcionário trabalha
+   na empresa. Sabendo que a cada 4 anos (quadriênio) o funcionário recebe um acréscimo de 1% no 
+   salário, calcule e informe o número de quadriênios a que o funcionário tem direito e o 
+   salário final.
+   Crie o arquivo quadrienios.js
+
+b) Elaborar um programa para uma veterinária, que leia o peso de uma ração em kg e o quanto um
+   gato consome por dia da ração, em gramas. Informe quantos dias irá durar a ração e o quanto
+   sobra da ração (em gramas).
+   Crie o arquivo veterinaria.js

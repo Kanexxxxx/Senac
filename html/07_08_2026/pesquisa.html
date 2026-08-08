@@ -1,0 +1,55 @@
+<script>
+//     const idades = [20, 30, 40, 50, 49];
+//     let maiores = false;
+//     for(const idade of idades){
+//         if (idade>=51){
+//         console.log(idade);
+//         maiores = true;
+//         }
+//     }
+//     if (!maiores){
+//         console.log("Não existem idades maiores que 51");
+//     }
+
+// const numeros = [10000, 20000, 300000, 4000000, 5000000];
+// const dobros = numeros.map(num => num * 2);
+// console.log(dobros.join("* *")); 
+
+// const amigos = [{"nome": "Miguel", "idade": 17},
+//                 {"nome": "Felipe", "idade": 18},
+//                 {"nome": "Mario", "idade": 49},
+//                 {"nome": "João", "idade": 65}];
+// const amigos2 = amigos.map(aux => ({nome: aux.nome, nasc: 2026 - aux.idade}));
+// for(const amigo of amigos2){
+//     console.log(`${amigo.nome} - ${amigo.nasc}`);
+// }
+
+// const numeros = [10,13,20,8,15]
+// const pares = numeros.filter(num => num % 2 === 0);
+// console.log(pares.join(" ! "));
+// console.log("Esses numeros São Pares Vetin")
+
+
+
+//const amigos = [{"nome": "Miguel", "idade": 17},
+                //{"nome": "Felipe", "idade": 18},
+              //  {"nome": "Mario", "idade": 49},
+               // {"nome": "João", "idade": 65}];
+//const amigos2 = amigos.filter(aux => aux.idade >= 100|| aux.nome.includes("D"));
+//for(const amigo of amigos2){
+ //   console.log(`${amigo.nome} - ${amigo.idade} anos`);
+//}
+
+//if (amigos2.length === 0){
+//    console.log("Não existem amigos maiores de idade ou com a letra D no nome");
+//}
+
+const numeros = [10,13,20,8,15];
+const soma = numeros.reduce((acumulador, num) => acumulador + num, 0);
+console.log(`A soma dos números é: ${soma}`); //coma:66
+
+const soma = amigos.reduce((acumulador, amigo) => acumulador + amigo.nome + "", "");
+console.log(`A soma: ${soma}`);
+console.log(`A Todos: ${soma}`);
+
+</script>

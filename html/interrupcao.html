@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interrupcao</title>
+</head>
+
+<body>
+    <script>
+        alert("Digite 0 para sair");
+
+        do {
+            const num = Number(prompt("Numero:"));
+
+            if (num == 0 || isNaN(num)) {
+                const sair = confirm("Confirmar saida?");
+
+                if (sair) {
+                    break; // Sai do laco.
+                } else {
+                    continue; // Volta para o inicio do laco.
+                }
+            }
+
+            if (num % 2 == 0) {
+                alert("Dobro de " + num + " e " + (num * 2));
+            } else {
+                alert("Triplo de " + num + " e " + (num * 3));
+            }
+        } while (true);
+
+        alert("Fim do programa.");
+    </script>
+</body>
+
+</html>

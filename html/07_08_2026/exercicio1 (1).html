@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Exercício 1 - Lista de Compras</title>
+
+<style>
+body{
+font-family:Arial;
+max-width:700px;
+margin:auto;
+padding:20px;
+}
+button{
+margin:5px;
+}
+#saida{
+margin-top:20px;
+padding:10px;
+border:1px solid #999;
+}
+</style>
+</head>
+<body>
+<h2>Lista de Compras</h2>
+
+Produto:
+<input id="produto">
+<br><br>
+
+<button onclick="adicionarFim()">Adicionar no Final</button>
+<button onclick="adicionarInicio()">Adicionar no Início</button>
+<button onclick="removerInicio()">Remover Primeiro</button>
+<button onclick="removerFim()">Remover Último</button>
+
+<div id="saida"></div>
+
+<script>
+
+const lista=[];
+
+function mostrar(){
+    let texto="";
+    texto+="Quantidade: "+lista.length+"<br><br>";
+    texto+="Join:<br>"+lista.join(" | ")+"<br><br>";
+    texto+="toString:<br>"+lista.toString()+"<br><br>";
+    texto+="Produtos:<br>";
+
+    for(let i=0;i<lista.length;i++){
+    texto+=(i+1)+" - "+lista[i]+"<br>";
+    }
+    
+    document.getElementById("saida").innerHTML=texto;
+}
+
+function adicionarFim(){
+    const p=document.getElementById("produto").value.trim();
+
+    if(p==""){
+        alert("Digite um produto");
+        return;
+    }
+
+    lista.push(p);
+    document.getElementById("produto").value="";
+    mostrar();
+}
+
+function adicionarInicio(){
+    const p=document.getElementById("produto").value.trim();
+
+    if(p==""){
+        alert("Digite um produto");
+        return;
+    }
+
+    lista.unshift(p);
+    document.getElementById("produto").value="";
+    mostrar();
+}
+
+function removerInicio(){
+    if(lista.length>0){
+        lista.shift();
+        mostrar();
+    }
+}
+
+function removerFim(){
+    if(lista.length>0){
+        lista.pop();
+        mostrar();
+    }
+}
+
+</script>
+
+</body>
+</html>
