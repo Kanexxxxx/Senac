@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<link rel="stylesheet" href="../../CSS/style.css">
+<meta charset="UTF-8">
+<title>Exercício 4 - Controle de Senhas de Atendimento</title>
+</head>
+<body>
+
+<h2>Controle de Senhas de Atendimento</h2>
+
+<button onclick="senhaNormal()">Senha Normal</button>
+<button onclick="senhaPrioritaria()">Senha Prioritária</button>
+<button onclick="atenderProximo()">Atender Próximo</button>
+<button onclick="localizarSenha()">Localizar Senha</button>
+<button onclick="mostrarFila()">Mostrar Fila</button>
+
+<div id="saida"></div>
+
+<script>
+
+// ---------------------------------------------------------------
+// A FILA
+// É um array. A posição 0 é sempre quem vai ser atendido primeiro.
+// ---------------------------------------------------------------
+const fila = [];
+
+// Contadores para numerar as senhas.
+// Cada vez que geramos uma senha, somamos 1 no contador.
+let contadorNormal = 0;
+let contadorPrioritaria = 0;
+
+// ---------------------------------------------------------------
+// SENHA NORMAL -> entra no FINAL da fila com push()
+// Quem chega normal espera todo mundo que já estava.
+// ---------------------------------------------------------------
+function senhaNormal() {
+
+    contadorNormal = contadorNormal + 1;
+
+    // Monta o texto da senha, ex: "N1", "N2", "N3"...
+    const senha = "N" + contadorNormal;
+
+    fila.push(senha);   // push = coloca no fim
+
+    alert("Senha " + senha + " gerada (normal).");
+    mostrarFila();
+}
+
+// ---------------------------------------------------------------
+// SENHA PRIORITÁRIA -> entra no INÍCIO da fila com unshift()
+// Ela "fura" a fila e passa na frente de todo mundo.
+// ---------------------------------------------------------------
+function senhaPrioritaria() {
+
+    contadorPrioritaria = contadorPrioritaria + 1;
+
+    const senha = "P" + contadorPrioritaria;
+
+    fila.unshift(senha);   // unshift = coloca no começo
+
+    alert("Senha " + senha + " gerada (PRIORITÁRIA).");
+    mostrarFila();
+}
+
+// ---------------------------------------------------------------
+// ATENDER PRÓXIMO -> tira o PRIMEIRO da fila com shift()
+// shift() faz duas coisas: remove o item da posição 0
+// E devolve esse item, por isso conseguimos guardar em uma variável.
+// ---------------------------------------------------------------
+function atenderProximo() {
+
+    // length é a quantidade de itens. Se for 0, a fila está vazia.
+    if (fila.length == 0) {
+        alert("Não há senhas na fila.");
+        return;   // sai da função, não tem quem atender
+    }
+
+    const atendida = fila.shift();
+
+    alert("Atendendo a senha: " + atendida);
+    mostrarFila();
+}
+
+// ---------------------------------------------------------------
+// LOCALIZAR SENHA
+// includes() -> responde true ou false (a senha está na fila?)
+// indexOf()  -> responde a POSIÇÃO dela (ou -1 se não achar)
+// ---------------------------------------------------------------
+function localizarSenha() {
+
+    // prompt() abre a caixinha pedindo a senha para o usuário.
+    const procurada = prompt("Digite a senha (ex: N1 ou P1):");
+
+    // Se clicou em cancelar ou não digitou nada, encerra.
+    if (procurada == null || procurada.trim() == "") {
+        return;
+    }
+
+    // toUpperCase() deixa maiúsculo, assim "n1" também encontra "N1".
+    const senha = procurada.trim().toUpperCase();
+
+    if (fila.includes(senha)) {
+
+        const posicao = fila.indexOf(senha);
+
+        // A posição no array começa em 0, mas para a pessoa
+        // faz mais sentido dizer "1º lugar da fila", por isso o +1.
+        alert("Senha " + senha + " encontrada!\n" +
+              "Posição no array: " + posicao + "\n" +
+              "Lugar na fila: " + (posicao + 1) + "º");
+    } else {
+        alert("Senha " + senha + " não está na fila.");
+    }
+}
+
+// ---------------------------------------------------------------
+// MOSTRAR FILA -> exibe tudo na tela
+// ---------------------------------------------------------------
+function mostrarFila() {
+
+    let texto = "<h3>Fila de atendimento</h3>";
+
+    // Quantidade usando length
+    texto += "Quantidade de senhas: " + fila.length + "<br><br>";
+
+    if (fila.length == 0) {
+        texto += "A fila está vazia.";
+        document.getElementById("saida").innerHTML = texto;
+        return;
+    }
+
+    // Lista item por item usando forEach.
+    // Ele entrega a senha da vez e a posição (i).
+    texto += "<b>Ordem de atendimento:</b><br>";
+
+    fila.forEach((senha, i) => {
+        texto += (i + 1) + "º - " + senha + "<br>";
+    });
+
+    // join(" → ") junta todos os itens do array em UM texto só,
+    // colocando a setinha entre eles. Ex: N1 → P1 → N2
+    texto += "<br><b>Fila:</b><br>";
+    texto += fila.join(" → ");
+
+    document.getElementById("saida").innerHTML = texto;
+}
+
+// Mostra a fila (vazia) assim que a página abre.
+mostrarFila();
+
+</script>
+
+</body>
+</html>

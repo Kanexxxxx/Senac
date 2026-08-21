@@ -1,50 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
 <link rel="stylesheet" href="../../CSS/style.css">
 <meta charset="UTF-8">
-<title>Exercício 3</title>
-
+<title>Exercício 3 - Controle de Filmes</title>
 </head>
 <body>
-<h2>Filmes</h2>
 
+<h2>Controle de Filmes</h2>
+
+<!-- Campo principal: o filme que vamos adicionar/procurar/remover -->
+Filme:
 <input id="filme">
+<br><br>
+
+<!-- Campo auxiliar: usado só no botão "Inserir Antes De".
+     Ele diz ANTES DE QUAL filme o novo deve entrar. -->
+Inserir antes de qual filme:
+<input id="referencia">
+<br><br>
+
 <button onclick="adicionar()">Adicionar</button>
-<button onclick="listar()">Listar</button>
+<button onclick="inserirAntes()">Inserir Antes De</button>
+<button onclick="procurar()">Procurar (1ª e última)</button>
 <button onclick="remover()">Remover</button>
+<button onclick="listar()">Listar</button>
+
 <div id="saida"></div>
 
 <script>
 
-const filmes=[];
+// Array que guarda os filmes. Começa vazio.
+// Repare que pode ter filmes repetidos, e é por isso que
+// indexOf e lastIndexOf dão respostas diferentes.
+const filmes = [];
 
-function adicionar(){
-    const f=document.getElementById("filme").value;
-    if(f=="") return;
-    filmes.push(f);
-}
+// ---------------------------------------------------------------
+// ADICIONAR: coloca o filme no FINAL da lista com push()
+// ---------------------------------------------------------------
+function adicionar() {
 
-function remover(){
-    const f=document.getElementById("filme").value;
-    const p=filmes.indexOf(f);
+    // .value pega o que foi digitado; .trim() apaga espaços sobrando
+    const f = document.getElementById("filme").value.trim();
 
-    if(p!=-1){
-        filmes.splice(p,1);
-        listar();
+    if (f == "") {
+        alert("Digite o nome do filme");
+        return;   // sai da função aqui, não adiciona nada
     }
+
+    filmes.push(f);                                  // entra no fim do array
+    document.getElementById("filme").value = "";     // limpa o campo
+    listar();
 }
 
-function listar(){
-    let txt="";
-    filmes.forEach((filme,i)=>{
-    txt+=(i+1)+" - "+filme+"<br>";
-});
+// ---------------------------------------------------------------
+// INSERIR ANTES DE: usa splice() para ENCAIXAR no meio do array
+//
+// splice(posicao, quantosApagar, itemNovo)
+//   - posicao       -> onde mexer
+//   - quantosApagar -> 0 significa "não apague nada, só insira"
+//   - itemNovo      -> o que entra nessa posição
+// ---------------------------------------------------------------
+function inserirAntes() {
 
-txt+="<br>Últimos três:<br>";
-txt+=filmes.slice(-3).join("<br>");
-document.getElementById("saida").innerHTML=txt;
+    const novo = document.getElementById("filme").value.trim();
+    const referencia = document.getElementById("referencia").value.trim();
 
+    if (novo == "" || referencia == "") {
+        alert("Preencha os dois campos");
+        return;
+    }
+
+    // indexOf procura o filme de referência e devolve a posição dele.
+    // Se não achar, devolve -1.
+    const pos = filmes.indexOf(referencia);
+
+    if (pos == -1) {
+        alert("O filme \"" + referencia + "\" não está na lista");
+        return;
+    }
+
+    // Inserindo NA posição do filme de referência, o novo fica ANTES dele
+    // e o de referência é empurrado uma casa para frente.
+    filmes.splice(pos, 0, novo);
+
+    document.getElementById("filme").value = "";
+    document.getElementById("referencia").value = "";
+    listar();
+}
+
+// ---------------------------------------------------------------
+// PROCURAR: mostra a PRIMEIRA e a ÚLTIMA ocorrência do filme
+//
+// indexOf()     -> procura do início para o fim (acha a 1ª)
+// lastIndexOf() -> procura do fim para o início (acha a última)
+// Se o filme aparece só uma vez, os dois devolvem o mesmo número.
+// ---------------------------------------------------------------
+function procurar() {
+
+    const f = document.getElementById("filme").value.trim();
+
+    if (f == "") {
+        alert("Digite o nome do filme");
+        return;
+    }
+
+    const primeira = filmes.indexOf(f);
+    const ultima = filmes.lastIndexOf(f);
+
+    if (primeira == -1) {
+        alert("Filme não encontrado");
+        return;
+    }
+
+    let texto = "<h3>Busca por \"" + f + "\"</h3>";
+    texto += "Primeira ocorrência (indexOf): posição " + primeira + "<br>";
+    texto += "Última ocorrência (lastIndexOf): posição " + ultima + "<br>";
+
+    if (primeira == ultima) {
+        texto += "Este filme aparece só uma vez na lista.<br>";
+    } else {
+        texto += "Este filme está repetido na lista.<br>";
+    }
+
+    document.getElementById("saida").innerHTML = texto;
+}
+
+// ---------------------------------------------------------------
+// REMOVER: apaga a primeira ocorrência do filme com splice()
+//
+// Aqui splice(pos, 1) quer dizer: na posição "pos", apague 1 item.
+// ---------------------------------------------------------------
+function remover() {
+
+    const f = document.getElementById("filme").value.trim();
+    const pos = filmes.indexOf(f);
+
+    if (pos == -1) {
+        alert("Filme não encontrado");
+        return;
+    }
+
+    filmes.splice(pos, 1);
+    document.getElementById("filme").value = "";
+    listar();
+}
+
+// ---------------------------------------------------------------
+// LISTAR: mostra tudo na tela
+// ---------------------------------------------------------------
+function listar() {
+
+    let txt = "<h3>Filmes (" + filmes.length + ")</h3>";
+
+    // forEach percorre o array. Ele entrega o item (filme)
+    // e a posição (i). Como i começa em 0, somamos +1 na exibição.
+    filmes.forEach((filme, i) => {
+        txt += (i + 1) + " - " + filme + "<br>";
+    });
+
+    // slice(-3) devolve uma CÓPIA com os 3 ÚLTIMOS itens.
+    // O número negativo significa "conte de trás para frente".
+    // slice não altera o array original, diferente do splice.
+    txt += "<br><b>Últimos três:</b><br>";
+    txt += filmes.slice(-3).join("<br>");
+
+    document.getElementById("saida").innerHTML = txt;
 }
 
 </script>
