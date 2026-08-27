@@ -1,5 +1,5 @@
 /* =====================================================================
-   EXERCICIO OOP 1 - Livro e Biblioteca
+   AULA 1 - EXERCICIO OOP 1: Sistema de Gerenciamento de Biblioteca
 
    Duas classes trabalhando juntas:
    - Livro:      representa UM livro e sabe controlar sua propria leitura

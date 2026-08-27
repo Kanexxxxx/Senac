@@ -1,5 +1,5 @@
 /* =====================================================================
-   DESAFIO: Sistema de Controle de Dispositivos - Smart Home
+   AULA 2 - EXERCICIO OOP 2: Sistema de Controle de Dispositivos (Smart Home)
    Classe LampadaInteligente
 
    O que o enunciado pediu:
