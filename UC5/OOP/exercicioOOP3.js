@@ -9,6 +9,8 @@
    - Heranca com extends/super    (Aula 3)
    - Polimorfismo por sobrescrita (Aula 3)
    - Metodo estatico (static)     (Aula 3)
+
+   Para rodar:  node exercicioOOP3.js
    ===================================================================== */
 
 
@@ -32,41 +34,19 @@ class Produto {
         this.#preco = preco;
     }
 
-    // ---- GETTERS: leitura controlada dos campos privados ----
-    // Usados SEM parenteses: produto.nome (parece um atributo comum).
-    get id() {
-        return this.#id;
-    }
+    // Getters: leitura controlada, usados SEM parenteses (produto.nome).
+    get id() { return this.#id; }
+    get nome() { return this.#nome; }
+    get preco() { return this.#preco; }
 
-    get nome() {
-        return this.#nome;
-    }
+    // Versoes PADRAO da classe pai. As filhas sobrescrevem com a regra delas.
+    calcularDesconto() { return 0; }
+    calcularFrete() { return 0; }
+    descricao() { return "Produto"; }
 
-    get preco() {
-        return this.#preco;
-    }
-
-    // -----------------------------------------------------------------
-    // calcularDesconto()
-    // Versao PADRAO da classe pai: produto comum nao tem desconto.
-    // As filhas vao SOBRESCREVER este metodo com a regra delas.
-    // -----------------------------------------------------------------
-    calcularDesconto() {
-        return 0;
-    }
-
-    // -----------------------------------------------------------------
-    // calcularFrete()
-    // Mesma ideia: por padrao o frete e zero.
-    // So o ProdutoFisico vai sobrescrever, porque so ele e entregue.
-    // -----------------------------------------------------------------
-    calcularFrete() {
-        return 0;
-    }
-
-    // Quanto o cliente realmente paga por este produto.
-    // Repare: chamamos this.calcularDesconto() sem saber de qual classe
-    // o objeto e. O proprio objeto escolhe a versao certa.
+    // Quanto o cliente realmente paga.
+    // Chamamos this.calcularDesconto() sem saber de qual classe o objeto e:
+    // o proprio objeto escolhe a versao certa (POLIMORFISMO).
     precoFinal() {
         return this.#preco - this.calcularDesconto() + this.calcularFrete();
     }
@@ -82,24 +62,13 @@ class Produto {
 class ProdutoFisico extends Produto {
 
     constructor(id, nome, preco, peso) {
-
-        // super() chama o constructor do pai para gravar id, nome e preco
-        // (que sao privados e a filha nao alcanca sozinha).
-        super(id, nome, preco);
-
-        // So depois do super() podemos usar this para o atributo novo.
-        this.peso = peso;   // em kg
+        super(id, nome, preco);   // super() grava id, nome e preco no pai
+        this.peso = peso;         // atributo novo, em kg
     }
 
-    // SOBRESCRITA 1: produto fisico tem 5% de desconto.
-    calcularDesconto() {
-        return this.preco * 0.05;
-    }
-
-    // SOBRESCRITA 2: o frete e R$ 2,50 por quilo.
-    calcularFrete() {
-        return this.peso * 2.50;
-    }
+    calcularDesconto() { return this.preco * 0.05; }   // sobrescrita: 5%
+    calcularFrete() { return this.peso * 2.50; }       // sobrescrita: R$ 2,50 por kg
+    descricao() { return `Fisico, ${this.peso} kg`; }  // sobrescrita
 }
 
 
@@ -113,13 +82,11 @@ class ProdutoDigital extends Produto {
 
     constructor(id, nome, preco, tamanhoArquivo) {
         super(id, nome, preco);
-        this.tamanhoArquivo = tamanhoArquivo;   // em MB
+        this.tamanhoArquivo = tamanhoArquivo;   // atributo novo, em MB
     }
 
-    // SOBRESCRITA: 20% de desconto (nao tem custo de entrega).
-    calcularDesconto() {
-        return this.preco * 0.20;
-    }
+    calcularDesconto() { return this.preco * 0.20; }   // sobrescrita: 20%
+    descricao() { return `Digital, ${this.tamanhoArquivo} MB`; }
 
     // Nao sobrescreve calcularFrete(): herda o 0 do pai.
 }
@@ -135,11 +102,9 @@ class Validador {
 
     // Preco valido: precisa ser numero e maior que zero.
     static precoValido(preco) {
-
         if (isNaN(preco)) {
             return false;
         }
-
         return preco > 0;
     }
 }
@@ -158,10 +123,7 @@ class Carrinho {
         this.produtos = [];   // array vazio que vai receber os produtos
     }
 
-    // -----------------------------------------------------------------
-    // adicionar()
     // Antes de guardar, o preco passa pelo metodo estatico do Validador.
-    // -----------------------------------------------------------------
     adicionar(produto) {
 
         if (Validador.precoValido(produto.preco) === false) {
@@ -173,14 +135,10 @@ class Carrinho {
         console.log(`ADICIONADO: ${produto.nome} - R$ ${produto.preco.toFixed(2)}`);
     }
 
-    // -----------------------------------------------------------------
-    // remover()
     // Procura o produto pelo id e tira do array com splice().
-    // -----------------------------------------------------------------
     remover(id) {
 
-        // Variavel de controle: guarda a posicao encontrada.
-        // Comeca em -1, que significa "nao achei".
+        // Variavel de controle: -1 significa "nao achei".
         let posicao = -1;
 
         for (let i = 0; i < this.produtos.length; i++) {
@@ -195,24 +153,17 @@ class Carrinho {
             return;
         }
 
-        // splice(posicao, 1) remove 1 item a partir daquela posicao.
         const removido = this.produtos[posicao];
-        this.produtos.splice(posicao, 1);
-
+        this.produtos.splice(posicao, 1);   // remove 1 item naquela posicao
         console.log(`REMOVIDO: ${removido.nome}`);
     }
 
-    // -----------------------------------------------------------------
-    // calcularTotal()
     // AQUI ESTA O POLIMORFISMO.
-    // O laco chama sempre produto.precoFinal(), sem nenhum if
-    // perguntando "e fisico ou digital?". Cada objeto ja sabe qual
-    // desconto e qual frete usar.
-    // -----------------------------------------------------------------
+    // O laco chama sempre produto.precoFinal(), sem nenhum if perguntando
+    // "e fisico ou digital?". Cada objeto ja sabe qual regra usar.
     calcularTotal() {
 
-        // Acumulador: comeca em 0 e vai somando.
-        let total = 0;
+        let total = 0;   // acumulador
 
         this.produtos.forEach((produto) => {
             total += produto.precoFinal();
@@ -221,10 +172,7 @@ class Carrinho {
         return total;
     }
 
-    // -----------------------------------------------------------------
-    // listar()
     // Mostra o carrinho item por item.
-    // -----------------------------------------------------------------
     listar() {
 
         console.log(`\n=== CARRINHO DE ${this.cliente.toUpperCase()} ===`);
@@ -236,7 +184,8 @@ class Carrinho {
 
         this.produtos.forEach((produto, index) => {
             console.log(
-                `${index + 1}. ${produto.nome} - R$ ${produto.preco.toFixed(2)} ` +
+                `${index + 1}. ${produto.nome} (${produto.descricao()}) ` +
+                `- R$ ${produto.preco.toFixed(2)} ` +
                 `| desconto: R$ ${produto.calcularDesconto().toFixed(2)} ` +
                 `| frete: R$ ${produto.calcularFrete().toFixed(2)} ` +
                 `| paga: R$ ${produto.precoFinal().toFixed(2)}`
@@ -292,6 +241,11 @@ console.log("\n--- Provando o metodo estatico ---");
 console.log(`Preco 300 e valido?   ${Validador.precoValido(300)}`);
 console.log(`Preco -10 e valido?   ${Validador.precoValido(-10)}`);
 console.log(`Preco "abc" e valido? ${Validador.precoValido("abc")}`);
+
+console.log("\n--- Provando o encapsulamento (campo privado) ---");
+// O getter le o preco normalmente...
+console.log(`Preco pelo getter: R$ ${teclado.preco.toFixed(2)}`);
+// ...mas nao existe "teclado.#preco" fora da classe: o # protege o dado.
 
 console.log("\n--- Provando a relacao E UM ---");
 console.log(`teclado instanceof ProdutoFisico -> ${teclado instanceof ProdutoFisico}`);
